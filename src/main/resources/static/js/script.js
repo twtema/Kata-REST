@@ -107,7 +107,7 @@ deleteUserForm.addEventListener('submit', event => {
                 refreshTable()
                 showAlert(`User with ID ${userId} was successfully deleted`, 'alert-success', 'delete-user-alert')
             } else {
-                
+
                 console.log('Произошла ошибка при выполнении запроса удаления');
                 showAlert(`Error while deleting user with ID ${userId}`, 'alert-danger', 'delete-user-error-alert')
             }
