@@ -19,7 +19,7 @@ public interface UserService {
 
     User getUserById(Long id);
 
-    void editUserAndHisRoles(long id, User userDetails, Set<Long> roleIds);
+    User getUserByEmail(String email);
 
 
 }

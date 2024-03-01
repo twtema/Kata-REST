@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>User Information</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-xxl navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" th:if="${user != null}" th:object="${user}"
+       th:text="${user.getEmail()}">Navbar</a>
+    <a class="navbar-brand">with roles:</a>
+    <a class="navbar-brand" th:if="${user != null}" th:object="${user}" th:text="${user.getRolesString()}">Roles</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDark"
+            aria-controls="navbarDark" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse show" id="navbarDark">
+      <ul class="navbar-nav me-auto mb-2 mb-xl-0"></ul>
+      <form class="d-flex" th:action="@{/logout}" th:method="POST">
+        <button class="btn btn-outline-light">Logout</button>
+      </form>
+    </div>
+  </div>
+</nav>
+<!-- Navbar end -->
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-2">
+      <br>
+      <div class="d-grid gap-2">
+        <button type="button" class="btn btn-outline-primary" data-bs-toggle="button"
+                onclick="location.href='/user'" autocomplete="off">User
+        </button>
+
+      </div>
+    </div>
+
+    <div class="col-10">
+      <h2>User information-page</h2>
+
+
+      <div class="tab-content">
+
+        <div class="tab-pane fade show active" id="tab-users-list-content" role="tabpanel"
+             aria-labelledby="tab-users-list">
+          <div class="card">
+            <div class="card-header">
+              <h6 class="card-title">About user</h6>
+            </div>
+            <div class="card-body">
+              <table class="table table-hover table-striped">
+                <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Email</th>
+                  <th>Name</th>
+                  <th>Age</th>
+                  <th>Roles</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td th:text="${authUser.id}"></td>
+                  <td th:text="${authUser.email}"></td>
+                  <td th:text="${authUser.firstName}"></td>
+                  <td th:text="${authUser.age}"></td>
+                  <td th:text = "${#strings.listJoin(userRoles, ', ')}"></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <!-- tab users list content end-->
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

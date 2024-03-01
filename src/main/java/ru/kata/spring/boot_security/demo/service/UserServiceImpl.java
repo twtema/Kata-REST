@@ -64,6 +64,7 @@ public class UserServiceImpl implements UserService {
             existingUser.setAge(user.getAge());
             existingUser.setEmail(user.getEmail());
             existingUser.setRoles(user.getRoles());
+            userRepository.save(existingUser);
             if (!existingUser.getPassword().equals(user.getPassword())) {
                 existingUser.setPassword(
                         bCryptPasswordEncoder.encode(user.getPassword()));
@@ -85,24 +86,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void editUserAndHisRoles(long id, User userDetails, Set<Long> roleIds) {
-        User user = userRepository.findUserById(id);
-        if(user!=null){
-            user.setUsername(userDetails.getUsername());
-            user.setFirstName(userDetails.getFirstName());
-            user.setLastName(userDetails.getLastName());
-            user.setAge(userDetails.getAge());
-            user.setEmail(userDetails.getEmail());
-            user.setRoles(userDetails.getRoles());
-            if (!user.getPassword().equals(userDetails.getPassword())) {
-                user.setPassword(
-                        bCryptPasswordEncoder.encode(userDetails.getPassword()));
-            }
-        } else {
-            throw new UsernameNotFoundException(
-                    String.format("User with id: %s not found", id));
-        }
-
-        }
-
+    public User getUserByEmail(String email) {
+        User user = userRepository.findByEmail(email);
+        return user;
     }
+
+}

@@ -19,8 +19,6 @@ public class User implements UserDetails {
     @Column
     private String password;
 
-
-
     @Column (name = "firstName")
     private String firstName;
 
